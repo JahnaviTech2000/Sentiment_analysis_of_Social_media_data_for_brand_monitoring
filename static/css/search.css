@@ -1,0 +1,25 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: linear-gradient(white, orange);
+}
+
+.result {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: linear-gradient(white, orange);
+}
+
+.result h1 {
+    color: #333;
+}
+
+.result p {
+    color: #666;
+}

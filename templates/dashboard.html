@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add additional CSS links if needed -->
+</head>
+<body>
+    <!-- Display search results here -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="w-11/12 h-screen mx-auto my-auto">
+    <div class="w-full flex justify-end mt-10">
+        <a href="/" class="text-2xl mr-20 bg-orange-400 text-white font-bold rounded-full px-12 py-4">Home</a>
+    </div>
+    <div class="mt-8 mb-16">
+        <h1 class="text-3xl text-gray-400 font-bold">Brand Name : <span class="text-gray-500">{{bname}}</span></h1>
+    </div>
+    <div class="flex flex-row gap-12">
+        <!-- Left -->
+        <div class="flex flex-row gap-4 w-2/4">
+            <div class="bg-white px-14 py-6 rounded-lg drop-shadow-2xl h-32">
+                <p class="text-gray-400 mb-2">Sentiment Score</p>
+                <h5 class="text-blue-300 text-4xl font-bold">{{ overall_brand_sentiment_score }}<span class="text-gray-500 text-xl"> %</h5>
+            </div>
+            <div class="bg-white px-14 py-6 rounded-lg drop-shadow-2xl h-32">
+                <p class="text-gray-400 mb-2">Brand Image</p>
+                {% if overall_brand_sentiment_category == "Positive" %}
+                <h5 class="text-green-300 text-4xl font-bold">{{ overall_brand_sentiment_category }}</h5>
+                {%endif%}
+                {% if overall_brand_sentiment_category == "Negative" %}
+                <h5 class="text-red-300 text-4xl font-bold">{{ overall_brand_sentiment_category }}</h5>
+                {%endif%}
+                {% if overall_brand_sentiment_category == "Neutral" %}
+                <h5 class="text-gray-300 text-4xl font-bold">{{ overall_brand_sentiment_category }}</h5>
+                {%endif%}
+            </div>
+        </div>
+        <!-- Right -->
+        <div class="h-80 w-80 mt-[-90px]">
+            <div id="container" style="width: 100%;">
+                <canvas id="pie-chart"></canvas>
+              </div>
+        </div>
+    </div>
+    <div class="mt-20 w-full grid grid-cols-3 gap-4 rounded-lg">
+        <div class="bg-white drop-shadow-md p-4">
+            <h3 class="text-lg font-bold mb-3">Top 5 Positive Comments</h3>
+            {%if not top_positive_comments%}
+            <p class="text-md text-red-400">No Positive Comments</p>
+            {%endif%}
+            {% for p in top_positive_comments %}
+            <p class="mb-2 text-md text-gray-600">{{p}}</p>
+            {%endfor%}
+        </div>
+        <div class="bg-white drop-shadow-md p-4 rounded-lg">
+            <h3 class="text-lg font-bold mb-3">Top 5 Negative Comments</h3>
+            {%if not top_negative_comments%}
+            <p class="text-md text-red-400">No Negative Comments</p>
+            {%endif%}
+            {% for n in top_negative_comments %}
+            <p class="mb-2 text-md text-gray-600">{{n}}</p>
+            {%endfor%}
+        </div>
+        <div class="bg-white drop-shadow-md p-4 rounded-lg">
+            <h3 class="text-lg font-bold mb-3">Top 5 Neutral Comments</h3>
+            {%if not top_neutral_comments%}
+            <p class="text-md text-red-400">No Neutral Comments</p>
+            {%endif%}
+            {% for ne in top_neutral_comments %}
+            <p class="mb-2 text-md text-gray-600">{{ne}}</p>
+            {%endfor%}
+        </div>
+
+    </div>
+    
+</div>
+<script>
+    var ctx = document.getElementById('pie-chart').getContext('2d');
+    var data = JSON.parse('{{ chart_data|escapejs }}');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                data: data.values,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            // Add your options here
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,123 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: linear-gradient(white, rgb(98, 111, 140));
+}
+
+/* Specific styles for index.html */
+.hero {
+    padding: 100px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin-bottom: 20px;
+    font-size: large;
+    color: #df7e17;
+}
+
+span {
+    color: rgb(73, 72, 70);
+    padding: 50px;
+}
+
+.hero button {
+    background-color: #8a8ad1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.file-drop {
+    text-align: center;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drop-box {
+    border: 5px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#fileButton {
+    display: block;
+    margin: 10px auto; /* Adjust margin as needed */
+}
+
+#fileDisplay {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.browse-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.browse-button:hover {
+    background-color: #8a8ad1;
+}
+
+.textname{
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+.textname:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow on focus */
+}
+
+.btn {
+    background-color: rgb(93, 93, 200);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px; /* Adjust margin as needed */
+    font-size: x-large;
+    aspect-ratio: 0;
+    right: 10px; /* Adjust right positioning as needed */
+    top: 50%; /* Adjust top positioning as needed */
+    transform: translateY(-50%); /* Center vertically */
+    align-content: center;
+}
+
+
+
+
+
+

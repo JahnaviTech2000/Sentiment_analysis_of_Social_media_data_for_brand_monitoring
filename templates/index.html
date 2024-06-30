@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Brand Analyzer{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Analyzer</title>
+    <!-- Link to your CSS files if needed -->
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <!-- placeholder icon -->
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2><span></span>Brand Analyzer<span></span></h2>
+            <p>Get Your Brand Analyis In Just 2 Minutes</p>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+         <input class="textname" type="text" name="brand_name" placeholder="Enter Your Brand Name" required> 
+        <div class="file-drop" id="fileDrop">
+            <div class="drop-box" id="dropBox">
+                <span class="drop-text">Drag & Drop your file here or click to select</span>
+            </div>
+            <input type="file" name="fil" id="fil"  accept=".csv" style="display: none;" required>
+            <div id="fileDisplay"></div>
+        </div>
+            <div class="search-bar" name="q" >
+                <input id="myButton" type="submit" class="btn" value="Analyze" />
+            </div>
+        </form>
+    </section>
+    
+
+
+
+<script>
+    const fileDrop = document.getElementById('fileDrop');
+    const fileInput = document.getElementById('fil');
+    const dropBox = document.getElementById('dropBox');
+    const fileDisplay = document.getElementById('fileDisplay');
+
+        // Get the button element
+        var button = document.getElementById("myButton");
+
+// Add event listener for the click event
+button.addEventListener("click", function() {
+    // Change the button text
+    button.value = "Analyzing...";});
+
+    // Function to handle file selection
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Display file name
+            fileDisplay.textContent = `Selected File: ${file.name}`;
+        } else {
+            // If no file selected, display message
+            fileDisplay.textContent = 'No file selected';
+        }
+    }
+
+    // Event listener for file input change
+    fileInput.addEventListener('change', handleFileSelect);
+
+    // Event listener for drag over
+    dropBox.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropBox.classList.add('drag-over');
+    });
+
+    // Event listener for drag leave
+    dropBox.addEventListener('dragleave', () => {
+        dropBox.classList.remove('drag-over');
+    });
+
+    // Event listener for drop
+    dropBox.addEventListener('drop', (event) => {
+        event.preventDefault();
+        dropBox.classList.remove('drag-over');
+        fileInput.files = event.dataTransfer.files;
+        handleFileSelect(event);
+    });
+
+    // Event listener for click on drop box
+    dropBox.addEventListener('click', () => {
+        fileInput.click();
+    });
+</script>
+
+</body>
+</html>
+{% endblock %}
